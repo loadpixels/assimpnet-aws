@@ -7,17 +7,17 @@
   
   <Target Name="CopyNativeAssimp" AfterTargets="AfterBuild" Condition="'$(ForceCopyNativeAssimp)' == 'true' OR !Exists('$(TargetDir)$(AssemblyName).deps.json')">
     <ItemGroup>
-        <NativeAssimpLibs Include="$(MSBuildThisFileDirectory)..\runtimes\**\*.*"/>
+        <NativeAssimpLibs Include="$(MSBuildThisFileDirectory)../runtimes/**/*.*"/>
     </ItemGroup>  
     <Message Text="Copying native Assimp libraries..." Importance="high" />
     <Message Text="$(TargetDir)$(AssemblyName).deps.json" Importance="high" />
-    <Copy SourceFiles="@(NativeAssimpLibs)" DestinationFolder="$(OutputPath)\runtimes\%(RecursiveDir)" />
+    <Copy SourceFiles="@(NativeAssimpLibs)" DestinationFolder="$(OutputPath)/runtimes/%(RecursiveDir)" />
   </Target>
  
   <Target Name="CleanNativeAssimp" BeforeTargets="BeforeClean" Condition="'$(ForceCopyNativeAssimp)' == 'true' OR !Exists('$(TargetDir)$(AssemblyName).deps.json')">
     <Message Text="Cleaning native Assimp libraries..." Importance="high" />
     <ItemGroup>
-	      <NativeAssimpLibsToDelete Include="$(TargetDir)runtimes\**\*assimp*.*;" />
+	      <NativeAssimpLibsToDelete Include="$(TargetDir)runtimes/**/*assimp*.*;" />
     </ItemGroup>
     <Delete Files="@(NativeAssimpLibsToDelete)" />
   </Target>
